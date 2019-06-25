@@ -88,13 +88,13 @@ app.post('/checkRole' , (req,res) => {
         }
 })*/
 
-app.post('/addAssistant',(req,role) => {
+app.post('/addAssistant',(req,res) => {
     const client = new Client({
         connectionString: connectionString
     })
     client.connect();
     console.log(req.body.pid);
-    client.query('Insert into order (oid,pid, quantity_ordered) values($1, $2)',
+    client.query('insert into orders (pid, quantity_ordered) values($1, $2)',
     [req.body.pid, req.body.quantity],(err,row) => {
         if(err){
             console.log('failure');
@@ -104,6 +104,7 @@ app.post('/addAssistant',(req,role) => {
             console.log('success');
         }
     })
+    
 
 })
    
